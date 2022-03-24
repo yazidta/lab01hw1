@@ -1,0 +1,77 @@
+==============================================HEADERS============================
+#include <iostream>
+#include <string>
+
+class Time{
+private:
+    int sec_;
+public:
+    Time(int sec = 0);
+    Time operator-(Time &rhs);
+    void print();
+    int test();
+    friend std::ostream &operator<<(std::ostream &str, Time &rhs);
+    friend std::istream &operator>>(std::istream &str, Time &rhs);
+    operator int();
+
+};
+====================================cpp not main =========================
+#include "Time.h"
+#include <string>
+
+Time::Time(int sec){
+    sec_ = sec;
+}
+
+Time Time::operator -(Time &rhs){
+    return Time(sec_ - rhs.sec_);
+}
+
+Time::operator int(){
+    return (int)sec_;
+}
+
+
+std::ostream &operator<<(std::ostream &str, Time &rhs){
+    int h, m, s;
+    h = rhs.sec_ / 3600;
+    m = (rhs.sec_ / 60) % 60;
+    s = rhs.sec_ % 60;
+
+
+    if(h){
+        if (h<10){
+            str << "0";
+        }
+        str << h << "h:";
+    }
+    if(m){
+        if (m<10){
+            str << "0";
+        }
+        str << m << "m:";
+    }
+    if(s<10){
+        str << "0";
+    }
+
+    str << s << "s";
+    return str;
+
+
+}
+==========================================MAIn=====================================
+
+    Time t1(200);
+    int temp=0;
+    cin>>temp;
+    Time t2(temp);
+    Time t3 = t2 - t1;
+
+    int t3s = t3;
+    std::cout << t1 << " - " << t2 << " = " << t3 << "\n";
+    cout << ": " << t3s << endl;
+
+
+    return 0;
+}
