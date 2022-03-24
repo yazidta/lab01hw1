@@ -1,0 +1,51 @@
+ #include <iostream>
+#include <vector>
+#include <numeric>
+
+using namespace std;
+class Complex
+{
+    float re_;
+    float im_;
+public:
+    Complex(float r=0, float i=0){
+        re_ = r;
+        im_ = i;
+    }
+
+    float get_im(){
+        return im_;
+    }
+
+    void set_im(float i){
+        im_ = i;
+    }
+
+    Complex add(Complex b){
+        float r, i;
+        r = re_ + b.re_;
+        i = im_ + b.im_;
+        return Complex(r, i);
+    }
+
+    void print(){
+        if(re_)
+            cout<<re_;
+        if(im_){
+            if(im_>0 && re_)
+                cout << '+';
+            cout<<im_<<'i';}
+        cout << endl;
+
+    }
+};
+int main()
+{
+    Complex a(1.0, -2.0);
+    Complex b(3.14);
+
+    b.set_im(-5);
+    Complex c = a.add(b);
+    c.print();
+    return 0;
+}
