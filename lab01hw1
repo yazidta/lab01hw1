@@ -74,3 +74,21 @@ public:
 
 };
 =======================================MAIN===============================================
+#include <iostream>
+#include <vector>
+#include <numeric>
+#include <student.h>
+using namespace std;
+
+int main()
+{
+
+
+        Student student{"Kalid", "Yazed", {5.0,2.0,3.0,4.0}, 152060};
+        std::cout <<"The avrg: " << student.calculate_grade(student) << std::endl;
+        student.print();
+        //    cout << student.get_name() << endl;
+        student.print_pass();
+        return 0;
+
+}
