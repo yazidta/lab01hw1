@@ -1,0 +1,76 @@
+
+==========================================HEADERS===================================
+#include <iostream>
+#include <numeric>
+#include <vector>
+using namespace std ;
+
+class Student {
+private:
+    std::string name;
+    std::string surname;
+    std::vector<float> grades;
+    int album;
+public:
+    Student(string n, string s, vector<float> g, int a){
+        name = n;
+        surname = s;
+        for(auto i: g ){
+            add_grade(i);
+        }
+        album = a;
+    }
+
+    float calculate_grade(const Student &student) {
+        float sum = std::accumulate(student.grades.begin(), student.grades.end(), 0.0);
+        return sum / student.grades.size();
+    }
+
+
+    bool add_grade(float grade) {
+        if (grade >= 2.0 && grade <= 5.0) {
+            grades.push_back(grade);
+            return true;
+        }
+        return false;
+    }
+
+    bool did_pass(){
+        int counter = 0;
+        for(auto i: grades){
+            if(i == 2.0)
+                counter++;
+        }
+        if(counter >= 2)
+            return false;
+        else
+            return true;
+
+    }
+    void print(){
+        cout << name << " " << surname << ": ";
+        for(auto a: grades)
+            cout << a << ' ';
+        cout << album <<endl;
+    }
+
+    string get_name(){
+        return name;
+    }
+
+    void set_name(string n){
+        name = n;
+    }
+
+    void print_pass(){
+        if(did_pass())
+            cout<<"Student Passed!" << endl;
+        else
+            cout << "You failed"<<endl;
+
+    }
+
+
+
+};
+=======================================MAIN===============================================
